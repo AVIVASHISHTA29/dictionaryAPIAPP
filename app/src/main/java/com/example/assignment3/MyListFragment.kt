@@ -135,7 +135,6 @@ class MyListFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release()
     }
 
 }
