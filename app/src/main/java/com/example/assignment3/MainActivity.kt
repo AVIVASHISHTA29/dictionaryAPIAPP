@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra("audioUrl", audioUrl)
                     intent.putExtra("word", jsonObject.getString("word"))
                     intent.putExtra("meanings", jsonObject.getJSONArray("meanings").toString())
-                    Log.i(TAG, "opaasing in intent"+audioUrl)
+                    Log.i(TAG, "passinh in intent"+audioUrl)
                     startActivity(intent)
 
                 } catch (e: JSONException) {

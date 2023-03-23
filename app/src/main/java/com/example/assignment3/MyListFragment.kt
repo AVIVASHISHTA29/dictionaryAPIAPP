@@ -46,27 +46,35 @@ class MyListFragment : Fragment() {
         val meanings = JSONArray(arguments?.getString("meanings"))
         Log.i(TAG, "meanings"+meanings)
         Log.i(TAG, "audioUrl: "+ audioUrl)
-        // Set heading text
+
         headingTextView.text = word?.capitalize()
 
-        // Set up audio button listener
         audioButton.setOnClickListener {
-            // Code to download and play audio
+
             Log.i(TAG, "audioUrlaudioUrl: "+audioUrl)
             if (audioUrl!=null && audioUrl?.length!! >0) {
-//                AudioPlayerTask().execute(audioUrl)
-//                mediaPlayer.start()
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
 
                 try {
-                    mediaPlayer.setDataSource(audioUrl)
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
+
+                    if (!mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop()
+                        mediaPlayer.reset()
+                        mediaPlayer.setDataSource(audioUrl)
+                        mediaPlayer.prepare()
+                        mediaPlayer.start()
+                        Toast.makeText(context, "Audio started playing..", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        mediaPlayer.stop()
+                        mediaPlayer.reset()
+                        Toast.makeText(context, "Stopping Audio...", Toast.LENGTH_SHORT).show()
+                    }
+
 
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-                Toast.makeText(context, "Audio started playing..", Toast.LENGTH_SHORT).show()
 
             } else{
                 Toast.makeText(context, "No Audio Url", Toast.LENGTH_SHORT).show()
